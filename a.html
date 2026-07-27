@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reino Animal - Explorando la Vida Salvaje</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --secondary: #40916c;
+            --accent: #d8f3dc;
+            --dark: #1b4332;
+            --light: #f8f9fa;
+            --warm: #bc6c25;
+            --ocean: #0077b6;
+            --sky: #90e0ef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            overflow-x: hidden;
+            background: var(--light);
+        }
+
+        /* Navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(27, 67, 50, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🦁 🦅 🐋 🦋 🐘 🦒 🐅 🦜';
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+            white-space: nowrap;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-100%) translateY(0); }
+            50% { transform: translateX(100%) translateY(-50px); }
+            100% { transform: translateX(200%) translateY(0); }
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--warm);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(188, 108, 37, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Secciones generales */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Intro */
+        .intro {
+            background: white;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--accent), white);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Categorías */
+        .category {
+            margin-bottom: 6rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .category-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+        }
+
+        .category-desc {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--secondary);
+        }
+
+        .animals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .animal-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .animal-card-header {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+        }
+
+        .mammals .animal-card-header { background: linear-gradient(135deg, #d4a373, #faedcd); }
+        .birds .animal-card-header { background: linear-gradient(135deg, #90e0ef, #caf0f8); }
+        .reptiles .animal-card-header { background: linear-gradient(135deg, #a3b18a, #dad7cd); }
+        .fish .animal-card-header { background: linear-gradient(135deg, #0077b6, #90e0ef); }
+        .amphibians .animal-card-header { background: linear-gradient(135deg, #70e000, #ccff33); }
+        .invertebrates .animal-card-header { background: linear-gradient(135deg, #ff006e, #fb5607); }
+
+        .animal-card-body {
+            padding: 1.5rem;
+        }
+
+        .animal-card h4 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .animal-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .animal-facts {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .animal-facts li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: start;
+            gap: 0.5rem;
+        }
+
+        .animal-facts li::before {
+            content: '✦';
+            color: var(--warm);
+            font-weight: bold;
+        }
+
+        /* Datos curiosos */
+        .curiosities {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 4rem auto;
+        }
+
+        .curiosities h2 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .curiosity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .curiosity-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .curiosity-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Tabla comparativa */
+        .comparison {
+            background: white;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1.2rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tr:hover {
+            background: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .section-header h2 { font-size: 2rem; }
+            .curiosities { padding: 2rem; }
+            table { font-size: 0.9rem; }
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animación de entrada */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">🌍 Reino Animal</a>
+        <ul class="nav-links">
+            <li><a href="#intro">Inicio</a></li>
+            <li><a href="#mamiferos">Mamíferos</a></li>
+            <li><a href="#aves">Aves</a></li>
+            <li><a href="#reptiles">Reptiles</a></li>
+            <li><a href="#peces">Peces</a></li>
+            <li><a href="#anfibios">Anfibios</a></li>
+            <li><a href="#curiosidades">Curiosidades</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>El Reino Animal</h1>
+            <p>Descubre la increíble diversidad de la vida en nuestro planeta. Más de 8.7 millones de especies habitan la Tierra, cada una con adaptaciones únicas asombrosas.</p>
+            <a href="#intro" class="btn">Comenzar Exploración</a>
+        </div>
+    </header>
+
+    <section class="intro" id="intro">
+        <div class="section-header fade-in">
+            <h2>La Vida en Números</h2>
+            <p>El reino animal (Animalia) es uno de los más diversos de la biosfera, con organismos que han conquistado todos los hábitats imaginables.</p>
+        </div>
+        
+        <div class="intro-grid">
+            <div class="stat-card fade-in">
+                <div class="icon">🐛</div>
+                <h3>1.3 millones</h3>
+                <p>Especies descritas científicamente hasta la fecha</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="icon">🔬</div>
+                <h3>8.7 millones</h3>
+                <p>Estimación total de especies en el planeta</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="icon">🌊</div>
+                <h3>71%</h3>
+                <p>De las especies animales son invertebrados marinos</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="icon">⚠️</div>
+                <h3>41,000+</h3>
+                <p>Especies amenazadas según la UICN</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 4rem; padding: 2rem; background: linear-gradient(135deg, #fff, var(--accent)); border-radius: 20px;">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--dark); margin-bottom: 1rem;">¿Qué son los animales?</h3>
+            <p>Los animales son organismos eucariotas, multicelulares y heterótrofos (obtienen nutrientes de otros organismos). La mayoría poseen tejidos especializados, capacidad de movimiento voluntario y sistemas nerviosos que les permiten responder a estímulos. Se clasifican en más de 35 filos, desde las esponjas (Porifera) hasta los cordados (Chordata), que incluyen a los vertebrados.</p>
+            <br>
+            <p>Los vertebrados —animales con columna vertebral— representan solo el 5% de todas las especies animales, pero incluyen a los grupos más conocidos: peces, anfibios, reptiles, aves y mamíferos. Los invertebrados, aunque menos visibles, dominan en biomasa y diversidad.</p>
+        </div>
+    </section>
+
+    <!-- MAMÍFEROS -->
+    <section class="category mammals" id="mamiferos">
+        <div class="category-header fade-in">
+            <span class="category-icon">🦁</span>
+            <h3>Mamíferos (Mammalia)</h3>
+        </div>
+        
+        <div class="category-desc fade-in">
+            <p><strong>Características:</strong> Animales de sangre caliente (homeotermos) con glándulas mamarias que producen leche para alimentar a sus crías. Tienen piel con pelo o pelaje, tres huesos en el oído medio y un neocórtex desarrollado. Son los únicos animales con diafragma para respirar.</p>
+            <p><strong>Diversidad:</strong> Aproximadamente 6,500 especies. Desde el diminuto musaraña etrusca (1.8g) hasta la ballena azul (180 toneladas).</p>
+        </div>
+
+        <div class="animals-grid">
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐘</div>
+                <div class="animal-card-body">
+                    <h4>Elefante Africano</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Loxodonta africana</span>
+                        <span class="tag">En Peligro</span>
+                    </div>
+                    <p>El animal terrestre más grande del mundo. Posee la nariz más versátil del reino animal con más de 40,000 músculos.</p>
+                    <ul class="animal-facts">
+                        <li>Peso: 4,000 - 7,000 kg</li>
+                        <li>Esperanza de vida: 60-70 años</li>
+                        <li>Cerebro de 5 kg (el más grande terrestre)</li>
+                        <li>Se comunican con infrasonido (below 20 Hz)</li>
+                        <li>Memoria excepcional: reconocen a otros elefantes después de décadas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐋</div>
+                <div class="animal-card-body">
+                    <h4>Ballena Azul</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Balaenoptera musculus</span>
+                        <span class="tag">En Peligro</span>
+                    </div>
+                    <p>El animal más grande que jamás haya existido en la Tierra, superando a cualquier dinosaurio conocido.</p>
+                    <ul class="animal-facts">
+                        <li>Longitud: hasta 30 metros</li>
+                        <li>Peso: hasta 180 toneladas</li>
+                        <li>Corazón del tamaño de un coche pequeño (600 kg)</li>
+                        <li>Comen 4 toneladas de krill al día</li>
+                        <li>Sus vocalizaciones alcanzan 188 dB, escuchables a 1,600 km</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🦇</div>
+                <div class="animal-card-body">
+                    <h4>Murciélago</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Chiroptera</span>
+                        <span class="tag">+1,400 especies</span>
+                    </div>
+                    <p>Los únicos mamíferos capaces de vuelo activo. Representan el 20% de todas las especies de mamíferos.</p>
+                    <ul class="animal-facts">
+                        <li>Ecolocalización: emiten sonidos de 100-200 kHz</li>
+                        <li>Algunos polinizan agaves y cactus</li>
+                        <li>El murciélago vampiro comparte sangre con compañeros de colonia</li>
+                        <li>Hibernan reduciendo su ritmo cardíaco a 10 latidos/min</li>
+                        <li>Crucero de vuelo: 1,000 km en una noche</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AVES -->
+    <section class="category birds" id="aves">
+        <div class="category-header fade-in">
+            <span class="category-icon">🦅</span>
+            <h3>Aves (Aves)</h3>
+        </div>
+        
+        <div class="category-desc fade-in">
+            <p><strong>Características:</strong> Vertebrados de sangre caliente con plumas, pico sin dientes y esqueleto neumático (hueco y ligero). Son descendientes directos de los dinosaurios terópodos. Poseen sistema respiratorio único con sacos aéreos.</p>
+            <p><strong>Diversidad:</strong> Aproximadamente 10,000 especies. Desde el colibrí abeja (2g) hasta el avestruz (150 kg).</p>
+        </div>
+
+        <div class="animals-grid">
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🦅</div>
+                <div class="animal-card-body">
+                    <h4>Águila Real</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Aquila chrysaetos</span>
+                        <span class="tag">Preocupación Menor</span>
+                    </div>
+                    <p>Rapaz emblemática del hemisferio norte. Símbolo de poder y libertad en numerosas culturas.</p>
+                    <ul class="animal-facts">
+                        <li>Envergadura: 1.8 - 2.3 metros</li>
+                        <li>Velocidad en picado: 240-320 km/h</li>
+                        <li>Visión 8 veces más aguda que la humana</li>
+                        <li>Construyen nidos de hasta 2 metros de diámetro</li>
+                        <li>Monógamas: se emparejan de por vida</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐧</div>
+                <div class="animal-card-body">
+                    <h4>Pingüino Emperador</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Aptenodytes forsteri</span>
+                        <span class="tag">Casi Amenazado</span>
+                    </div>
+                    <p>El único animal que se reproduce en el invierno antártico. Los machos incuban el huevo durante 64 días sin comer.</p>
+                    <ul class="animal-facts">
+                        <li>Altura: 1.1 - 1.3 metros (el más grande)</li>
+                        <li>Bucean hasta 535 metros de profundidad</li>
+                        <li>Resisten temperaturas de -60°C</li>
+                        <li>Pierden 40% de su peso durante incubación</li>
+                        <li>Nadan a 9 km/h, pero alcanzan 36 km/h en "vuelo" subacuático</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🦜</div>
+                <div class="animal-card-body">
+                    <h4>Guacamayo Azul y Amarillo</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Ara ararauna</span>
+                        <span class="tag">Preocupación Menor</span>
+                    </div>
+                    <p>Los loros más grandes de la Amazonía. Poseen pico extraordinariamente fuerte y capacidad cognitiva avanzada.</p>
+                    <ul class="animal-facts">
+                        <li>Envergadura: 1.2 metros</li>
+                        <li>Pico: 1,500 N de fuerza (puede quebrar nuez de coco)</li>
+                        <li>Imitan sonidos y desarrollan vocabulario de 20+ palabras</li>
+                        <li>Monógamos y viven 50-60 años</li>
+                        <li>Se acicalan mutuamente para fortalecer vínculos de pareja</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REPTILES -->
+    <section class="category reptiles" id="reptiles">
+        <div class="category-header fade-in">
+            <span class="category-icon">🐊</span>
+            <h3>Reptiles (Reptilia)</h3>
+        </div>
+        
+        <div class="category-desc fade-in">
+            <p><strong>Características:</strong> Vertebrados de sangre fría (ectotermos) con piel cubierta de escamas o placas óseas. Respiran exclusivamente por pulmones. La mayoría son ovíparos, aunque algunos son ovovivíparos. Aparecieron hace 315 millones de años.</p>
+            <p><strong>Diversidad:</strong> Aproximadamente 11,000 especies. Incluyen cocodrilos, serpientes, lagartos, tuátaras y tortugas.</p>
+        </div>
+
+        <div class="animals-grid">
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐊</div>
+                <div class="animal-card-body">
+                    <h4>Cocodrilo del Nilo</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Crocodylus niloticus</span>
+                        <span class="tag">Preocupación Menor</span>
+                    </div>
+                    <p>El reptil más agresivo de África. Superviviente del Cretácico con diseño evolutivo prácticamente inmutable.</p>
+                    <ul class="animal-facts">
+                        <li>Longitud: 3.5 - 5 metros (machos)</li>
+                        <li>Mordida: 5,000 psi (la más fuerte del reino animal)</li>
+                        <li>Cerebro del tamaño de un pulgar pero altamente eficiente</li>
+                        <li>Metabolismo puede reducirse al 10% durante ayuno</li>
+                        <li>Cuidado parental: transportan crías en boca durante meses</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐢</div>
+                <div class="animal-card-body">
+                    <h4>Tortuga Galápagos</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Chelonoidis niger</span>
+                        <span class="tag">Vulnerable</span>
+                    </div>
+                    <p>Los vertebrados terrestres más longevos. Icono de la evolución que inspiró a Charles Darwin.</p>
+                    <ul class="animal-facts">
+                        <li>Peso: 250-300 kg</li>
+                        <li>Esperanza de vida: 100-150 años (registrado: 175 años)</li>
+                        <li>Caparazón de 1.3 metros de longitud</li>
+                        <li>Pueden sobrevivir 6 meses sin comida ni agua</li>
+                        <li>Especies con caparazón de silla: domedas (húmedas) y ensilladas (secas)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐍</div>
+                <div class="animal-card-body">
+                    <h4>Pitón Reticulada</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Malayopython reticulatus</span>
+                        <span class="tag">Preocupación Menor</span>
+                    </div>
+                    <p>La serpiente más larga del mundo. Constrictor no venenoso que mata por asfixia mecánica.</p>
+                    <ul class="animal-facts">
+                        <li>Longitud récord: 10 metros (reportes no verificados de 15m)</li>
+                        <li>Mandíbula desarticulable: puede tragar presa de su tamaño</li>
+                        <li>Escamas iridiscentes que refractan luz como arcoíris</li>
+                        <li>Organos termosensores (fosas labiales) detectan infrarrojo</li>
+                        <li>Digestión completa toma 2-3 semanas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PECES -->
+    <section class="category fish" id="peces">
+        <div class="category-header fade-in">
+            <span class="category-icon">🐠</span>
+            <h3>Peces (Pisces)</h3>
+        </div>
+        
+        <div class="category-desc fade-in">
+            <p><strong>Características:</strong> Vertebrados acuáticos con branquias para respirar bajo el agua. La mayoría tienen escamas y aletas. Son los vertebrados más antiguos (500 millones de años) y diversos. Incluyen peces óseos y cartilaginosos.</p>
+            <p><strong>Diversidad:</strong> Aproximadamente 34,000 especies. Habitan desde fuentes termales ácidas hasta fosas oceánicas de 8,000 metros.</p>
+        </div>
+
+        <div class="animals-grid">
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🦈</div>
+                <div class="animal-card-body">
+                    <h4>Tiburón Blanco</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Carcharodon carcharias</span>
+                        <span class="tag">Vulnerable</span>
+                    </div>
+                    <p>El superpredador oceánico más icónico. Perfecta máquina de caza evolucionada durante 400 millones de años.</p>
+                    <ul class="animal-facts">
+                        <li>Longitud: 4.5 - 6.4 metros</li>
+                        <li>Dientes: 300 en filas múltiples, reemplazables</li>
+                        <li>Olfato: detectan 1 gota de sangre en 100 litros de agua</li>
+                        <li>Electrorrecepción: detectan latidos cardíacos a 1 metro</li>
+                        <li>Salto "breaching": alcanzan 3 metros fuera del agua</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐡</div>
+                <div class="animal-card-body">
+                    <h4>Pez Payaso</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Amphiprioninae</span>
+                        <span class="tag">Preocupación Menor</span>
+                    </div>
+                    <p>Famoso por su simbiosis mutualista con anémonas de mar. Todos nacen machos; el dominante se convierte en hembra.</p>
+                    <ul class="animal-facts">
+                        <li>Mucosa especial las protege de los nematocistos de anémonas</li>
+                        <li>Hermafroditas secuenciales protándricos</li>
+                        <li>Hierarquía estricta: solo la hembra dominante se reproduce</li>
+                        <li>Incuban huevos 6-10 días; el macho los ventila con aletas</li>
+                        <li>5-16 cm de longitud; 30 especies reconocidas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐟</div>
+                <div class="animal-card-body">
+                    <h4>Pez Luna Oceánico</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Mola mola</span>
+                        <span class="tag">Vulnerable</span>
+                    </div>
+                    <p>El pez óseo más pesado del mundo. Su forma discoide es única en los vertebrados marinos.</p>
+                    <ul class="animal-facts">
+                        <li>Peso: 247-1,000 kg (récord: 2,300 kg)</li>
+                        <li>Longitud: 3.3 metros; altura: 4.2 metros (aletas)</li>
+                        <li>Ponen 300 millones de huevos (la mayor fecundidad animal)</li>
+                        <li>Se alimentan principalmente de medusas (96% de dieta)</li>
+                        <li>Bucean hasta 600 metros; suben a superficie a "tomar sol"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANFIBIOS -->
+    <section class="category amphibians" id="anfibios">
+        <div class="category-header fade-in">
+            <span class="category-icon">🐸</span>
+            <h3>Anfibios (Amphibia)</h3>
+        </div>
+        
+        <div class="category-desc fade-in">
+            <p><strong>Características:</strong> Vertebrados de sangre fría con piel permeable sin escamas. La mayoría tienen ciclo de vida bífido: larvas acuáticas con branquias y adultos terrestres con pulmones. Son bioindicadores sensibles de la salud ambiental.</p>
+            <p><strong>Diversidad:</strong> Aproximadamente 8,000 especies. El 41% está amenazado de extinción, siendo el grupo más vulnerable.</p>
+        </div>
+
+        <div class="animals-grid">
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐸</div>
+                <div class="animal-card-body">
+                    <h4>Rana Goliat</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Conraua goliath</span>
+                        <span class="tag">En Peligro</span>
+                    </div>
+                    <p>La rana más grande del mundo. Habita exclusivamente en ríos de Camerún y Guinea Ecuatorial.</p>
+                    <ul class="animal-facts">
+                        <li>Longitud: 32 cm; peso: 3.3 kg</li>
+                        <li>Construyen nidos de agua para sus huevos en ríos</li>
+                        <li>Pueden vivir 15 años en cautiverio</li>
+                        <li>Se alimentan de arañas, gusanos, insectos, pequeños peces</li>
+                        <li>Piel mucosa produce compuestos antibióticos únicos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🦎</div>
+                <div class="animal-card-body">
+                    <h4>Salamandra Axolote</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Ambystoma mexicanum</span>
+                        <span class="tag">En Peligro Crítico</span>
+                    </div>
+                    <p>Neoténico: alcanza madurez sexual manteniendo características larvarias. Capacidad de regeneración extraordinaria.</p>
+                    <ul class="animal-facts">
+                        <li>Regeneran: extremidades, corazón, partes del cerebro, ojos</li>
+                        <li>Branquias externas plumosas: 3 pares visibles</li>
+                        <li>Longitud: 15-45 cm</li>
+                        <li>Endémico del lago Xochimilco (Ciudad de México)</li>
+                        <li>Genoma 10 veces más grande que el humano (32 Gb)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐸</div>
+                <div class="animal-card-body">
+                    <h4>Rana Flecha Venenosa</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Dendrobatidae</span>
+                        <span class="tag">+170 especies</span>
+                    </div>
+                    <p>Pequeñas ranas tropicales con coloración aposemática (advertencia). Su veneno proviene de la dieta de hormigas y termitas.</p>
+                    <ul class="animal-facts">
+                        <li>Longitud: 1.5 - 6 cm</li>
+                        <li>Batracotoxina: 200 microgramos pueden matar a un humano</li>
+                        <li>En cautiverio pierden toxicidad (dieta controlada)</li>
+                        <li>Crianza parental: transportan renacuajos en espalda</li>
+                        <li>Algunas especies azules son las más tóxicas: Phyllobates terribilis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INVERTEBRADOS -->
+    <section class="category invertebrates" id="invertebrados">
+        <div class="category-header fade-in">
+            <span class="category-icon">🦋</span>
+            <h3>Invertebrados (Invertebrata)</h3>
+        </div>
+        
+        <div class="category-desc fade-in">
+            <p><strong>Características:</strong> Animales sin columna vertebral. Representan el 97% de todas las especies animales. Incluyen artrópodos (insectos, arácnidos, crustáceos), moluscos, gusanos, cnidarios, equinodermos y poríferos.</p>
+            <p><strong>Diversidad:</strong> Más de 1.3 millones de especies descritas. Se estima que existen 5-10 millones de especies de insectos aún por descubrir.</p>
+        </div>
+
+        <div class="animals-grid">
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🐙</div>
+                <div class="animal-card-body">
+                    <h4>Pulpo Común</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Octopus vulgaris</span>
+                        <span class="tag">Preocupación Menor</span>
+                    </div>
+                    <p>Cefalópodo con inteligencia comparable a la de vertebrados. Tres corazones y sangre azul por hemocianina.</p>
+                    <ul class="animal-facts">
+                        <li>8 brazos con 2,240 ventosas sensoriales</li>
+                        <li>Cerebro distribuido: 2/3 de neuronas están en brazos</li>
+                        <li>Camuflaje instantáneo: cromatóforos, iridóforos, leucóforos</li>
+                        <li>Escapan de acuarios y resuelven rompecabezas</li>
+                        <li>Reproducción terminal: mueren después de desovar</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🦋</div>
+                <div class="animal-card-body">
+                    <h4>Mariposa Monarca</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Danaus plexippus</span>
+                        <span class="tag">En Peligro</span>
+                    </div>
+                    <p>Realiza la migración más larga de cualquier insecto: 4,000 km desde Canadá hasta México.</p>
+                    <ul class="animal-facts">
+                        <li>4 generaciones completan el ciclo migratorio anual</li>
+                        <li>Usan brújula solar y magnetorecepción para navegar</li>
+                        <li>Larvas se alimentan exclusivamente de Asclepias (tóxica)</li>
+                        <li>Almacenan cardenólidos: se vuelven venenosas para depredadores</li>
+                        <li>Reducción del 80% de población en 20 años (pérdida de hábitat)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animal-card fade-in">
+                <div class="animal-card-header">🕷️</div>
+                <div class="animal-card-body">
+                    <h4>Araña Pavo Real</h4>
+                    <div class="animal-meta">
+                        <span class="tag">Maratus volans</span>
+                        <span class="tag">No evaluada</span>
+                    </div>
+                    <p>Pequeña araña australiana famosa por su complejo cortejo visual. Los machos bailan para impresionar a las hembras.</p>
+                    <ul class="animal-facts">
+                        <li>Tamaño: 5 mm (machos)</li>
+                        <li>Placas abdominales iridiscentes que refractan luz</li>
+                        <li>Baile de cortejo: 50+ movimientos coordinados</li>
+                        <li>Si la hembra no queda impresionada, la devora</li>
+                        <li>No vuela: las "aletas" son para exhibición visual</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATOS CURIOSOS -->
+    <section class="curiosities" id="curiosidades">
+        <h2 class="fade-in">🧠 Datos Asombrosos del Reino Animal</h2>
+        <div class="curiosity-grid">
+            <div class="curiosity-item fade-in">
+                <h4>🐋 El Corazón de la Ballena Azul</h4>
+                <p>Latía tan fuerte que podía detectarse a 3 km de distancia. Sus latidos son inaudibles para humanos (infrasonido de 14 Hz). Un humano podría gatear por sus arterias.</p>
+            </div>
+            <div class="curiosity-item fade-in">
+                <h4>🦑 El Calamar Colosal</h4>
+                <p>Tiene el ojo más grande del reino animal: 27 cm de diámetro (tamaño de balón de fútbol). Posee un pico de pico loro capaz de destrozar presas.</p>
+            </div>
+            <div class="curiosity-item fade-in">
+                <h4>🐘 Memoria Elefantina Real</h4>
+                <p>Los elefantes reconocen a más de 200 individuos por su olor y vocalización. Pueden recordar ubicaciones de agua durante sequías de décadas.</p>
+            </div>
+            <div class="curiosity-item fade-in">
+                <h4>🦎 Regeneración Total</h4>
+                <p>La salamandra axolote puede regenerar su corazón, partes del cerebro, ojos y extremidades perfectamente, sin cicatrización. Científicos estudian su genoma para medicina regenerativa humana.</p>
+            </div>
+            <div class="curiosity-item fade-in">
+                <h4>🐝 Inteligencia de Abejas</h4>
+                <p>Las abejas pueden contar hasta 4, reconocer rostros humanos, resolver el "problema del viajante" matemático, y comunican ubicaciones mediante danza en ángulos precisos.</p>
+            </div>
+            <div class="curiosity-item fade-in">
+                <h4>🐙 Sangre Azul</h4>
+                <p>Los pulpos, almejas y cangrejos de herradura tienen hemocianina (cobre) en lugar de hemoglobina (hierro). Su sangre es actualmente esencial para detectar endotoxinas en vacunas.</p>
+            </div>
+            <div class="curiosity-item fade-in">
+                <h4>🦜 Loros Bilingües</h4>
+                <p>Los loros grises africanos entienden conceptos abstractos como "color", "forma" y "número". Alex, el famoso loro, aprendió 100 palabras y preguntaba "¿Qué color?" viendo objetos nuevos.</p>
+            </div>
+            <div class="curiosity-item fade-in">
+                <h4>🦌 Ciervo de Agua</h4>
+                <p>Puede sumergirse completamente bajo el agua durante 30 minutos usando sus fosas nasales como válvulas. Es el único cérvido que vive principalmente en pantanos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TABLA COMPARATIVA -->
+    <section class="comparison">
+        <div class="section-header fade-in">
+            <h2>Comparativa de Grupos Animales</h2>
+            <p>Características distintivas de los principales grupos de vertebrados</p>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Característica</th>
+                    <th>Mamíferos</th>
+                    <th>Aves</th>
+                    <th>Reptiles</th>
+                    <th>Peces</th>
+                    <th>Anfibios</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Temperatura</strong></td>
+                    <td>Caliente</td>
+                    <td>Caliente</td>
+                    <td>Fría</td>
+                    <td>Fría</td>
+                    <td>Fría</td>
+                </tr>
+                <tr>
+                    <td><strong>Reproducción</strong></td>
+                    <td>Vivíparos (mayoría)</td>
+                    <td>Ovíparos</td>
+                    <td>Ovíparos/Ovovivíparos</td>
+                    <td>Ovíparos/Ovovivíparos</td>
+                    <td>Ovíparos</td>
+                </tr>
+                <tr>
+                    <td><strong>Piel/Cobertura</strong></td>
+                    <td>Pelo</td>
+                    <td>Plumas</td>
+                    <td>Escamas</td>
+                    <td>Escamas/Mucosa</td>
+                    <td>Piel permeable</td>
+                </tr>
+                <tr>
+                    <td><strong>Respiración</strong></td>
+                    <td>Pulmones</td>
+                    <td>Pulmones + Sacos aéreos</td>
+                    <td>Pulmones</td>
+                    <td>Branquias</td>
+                    <td>Branquias/Pulmones/Piel</td>
+                </tr>
+                <tr>
+                    <td><strong>Corazón</strong></td>
+                    <td>4 cámaras</td>
+                    <td>4 cámaras</td>
+                    <td>3 cámaras (excepto cocodrilos)</td>
+                    <td>2 cámaras</td>
+                    <td>3 cámaras</td>
+                </tr>
+                <tr>
+                    <td><strong>Especies aprox.</strong></td>
+                    <td>6,500</td>
+                    <td>10,000</td>
+                    <td>11,000</td>
+                    <td>34,000</td>
+                    <td>8,000</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem;">🌍 Reino Animal</p>
+        <p>Explorando la maravillosa diversidad de la vida en nuestro planeta.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Datos basados en UICN, Enciclopedia de la Vida y literatura científica actualizada.</p>
+        <p style="margin-top: 2rem; opacity: 0.6;">© 2026 - Creado con ❤️ para la educación y conservación</p>
+    </footer>
+
+    <script>
+        // Animación de entrada al scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Efecto parallax suave en hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+
+</body>
+</html>
